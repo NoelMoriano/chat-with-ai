@@ -36,6 +36,10 @@ btnAllClearElement.addEventListener("click", () => {
 const fetchAnswer = async (promtValue) => {
   if (!promtValue) return;
 
+  const wrapperResponseItemsElement = document.querySelector(
+      "#wrapper-response-items"
+  );
+
   inputPromtElement.value = "";
 
   const response = await fetch(OPENAI_API_URL, {
