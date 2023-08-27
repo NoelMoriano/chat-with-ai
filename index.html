@@ -10,22 +10,38 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <!-- CDNS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body class="bg-dark text-white pt-3 pb-3">
     <div class="container">
-      <div class="row gap-4 mb-5">
+      <div class="row gap-1 mb-4">
         <div class="col-12">
-          <h1 class="text-center">Mi asistente personal</h1>
+          <h1 class="text-center">Asistente con GTP-3.5</h1>
         </div>
         <div class="col-12">
-          <div class="input-promt-item">
-            <input type="text" id="input-promt" />
-            <button id="btn-generate">Enviar</button>
+          <div class="wrapper-top-elements">
+            <form class="form-promt-item" id="form-element">
+              <input type="text" name="promt" id="input-promt" />
+              <button id="btn-generate">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+            <div class="btn-clear-item">
+              <button id="all-clear">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
       <div class="row gap-3">
         <div class="col-12 gap-3">
           <div class="wrapper-response-items" id="wrapper-response-items"></div>
@@ -37,6 +53,8 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/load.js"></script>
     <script src="./js/generate.js"></script>
   </body>
 </html>

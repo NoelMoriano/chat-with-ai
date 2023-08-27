@@ -1,26 +1,42 @@
+const formElement = document.querySelector("#form-element");
 const inputPromtElement = document.querySelector("#input-promt");
 const btnGenerateElement = document.querySelector("#btn-generate");
-const wrapperResponseItemsElement = document.querySelector(
-  "#wrapper-response-items"
-);
+const btnAllClearElement = document.querySelector("#all-clear");
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = "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";
+
+formElement.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(formElement);
+
+  const formDataObject = Object.fromEntries(formData.entries());
+
+  const { promt } = formDataObject;
+
+  await fetchAnswer(promt);
+});
 
 btnGenerateElement.addEventListener("click", async () => {
+  const promt = inputPromtElement.value;
+
+  await fetchAnswer(promt);
+});
+
+btnAllClearElement.addEventListener("click", () => {
+  const wrapperResponseItemsElement = document.querySelector(
+    "#wrapper-response-items"
+  );
+
+  clearStorage();
+  wrapperResponseItemsElement.innerHTML = "";
+});
+
+const fetchAnswer = async (promtValue) => {
   if (!promtValue) return;
 
-  const promtValue = inputPromtElement.value;
-
-  wrapperResponseItemsElement.innerHTML += `<div class="item-question mb-3">
-  <div class="avatar-item">
-        <label for="assistant">noeL</label>
-        <img src="./images/avatar.webp" alt="bot" />
-  </div>
-  <p class="text-content lead">
-    ${promtValue}
-  </p>
-</div>`;
+  inputPromtElement.value = "";
 
   const response = await fetch(OPENAI_API_URL, {
     method: "POST",
@@ -48,15 +64,28 @@ btnGenerateElement.addEventListener("click", async () => {
   </div>`);
   }
 
+  console.log("data->", data);
+
   const { role, content } = data.choices[0].message;
 
-  wrapperResponseItemsElement.innerHTML += `<div class="item-response mb-3" id="item-response">
-  <div class="avatar-item">
-        <img src="./images/bot.png" alt="bot" />
-        <label for="assistant">${role}</label>
-  </div>
-  <p class="text-content lead">
-    ${content}
-  </p>
-</div>`;
-});
+  localStorage.setItem(
+    "messages",
+    JSON.stringify([
+      ...(messages || []),
+      {
+        id: data.id,
+        question: {
+          promt: promtValue,
+        },
+        response: {
+          role,
+          content,
+        },
+      },
+    ])
+  );
+
+  onSetStorageData();
+
+  speechVoice(content);
+};
