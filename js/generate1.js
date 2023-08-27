@@ -12,10 +12,12 @@ btnGenerateElement.addEventListener("click", async () => {
 
   if (!promtValue) return;
 
+  inputPromtElement.value = "";
+
   wrapperResponseItemsElement.innerHTML += `<div class="item-question mb-3">
   <div class="avatar-item">
-        <label for="assistant">noeL</label>
-        <img src="./images/avatar.webp" alt="bot" />
+    <label>noeL</label>
+    <img src="./images/avatar.webp" alt="bot" />
   </div>
   <p class="text-content lead">
     ${promtValue}
@@ -25,38 +27,32 @@ btnGenerateElement.addEventListener("click", async () => {
   const response = await fetch(OPENAI_API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: promtValue,
-        },
-      ],
+      messages: [{ role: "user", content: promtValue }],
       temperature: 0.7,
     }),
   });
 
   const data = await response.json();
 
-  if (!response.ok) {
+  if (!response.ok)
     return (wrapperResponseItemsElement.innerHTML = `<div class="alert alert-danger" role="alert">
-    ${data.error.message}
-  </div>`);
-  }
+  ${data.error.message}
+</div>`);
 
   const { role, content } = data.choices[0].message;
 
-  wrapperResponseItemsElement.innerHTML += `<div class="item-response mb-3" id="item-response">
-  <div class="avatar-item">
-        <img src="./images/bot.png" alt="bot" />
-        <label for="assistant">${role}</label>
-  </div>
-  <p class="text-content lead">
-    ${content}
-  </p>
+  wrapperResponseItemsElement.innerHTML += `<div class="item-response mb-3">
+<div class="avatar-item">
+  <img src="./images/bot.png" alt="bot" />
+  <label>${role}</label>
+</div>
+<p class="text-content lead">
+  ${content}
+</p>
 </div>`;
 });
