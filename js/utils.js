@@ -29,3 +29,13 @@ const addClassName = (element, className) => element.classList.add(className);
 
 const removeClassName = (element, className) =>
   element.classList.remove(className);
+
+const fetchApiKey = async () => {
+  const response = await fetch("./js/credentials.json");
+
+  if (!response.ok) throw new Error("Error to get api key");
+
+  const data = await response.json();
+
+  return data;
+};

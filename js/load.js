@@ -11,7 +11,8 @@ const onSetStorageData = () => {
 
   (messages || []).map(
     (message) =>
-      (wrapperResponseItemsElement.innerHTML += `<div class="item-question mb-3">
+      (wrapperResponseItemsElement.innerHTML += `<div class="wrapper-question-and-response mb-5">
+      <div class="item-question mb-3">
       <div class="avatar-item">
             <label for="assistant">noeL</label>
             <img src="./images/avatar.webp" alt="bot" />
@@ -34,6 +35,7 @@ const onSetStorageData = () => {
       <p class="text-content lead">
         ${message.response.content}
       </p>
+      </div>
       </div>`)
   );
 
