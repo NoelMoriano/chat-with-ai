@@ -1,10 +1,34 @@
-$bg-primary: #0d1838;
-$bg-secondary: #181f34;
+$bg-primary1: #020712;
+$bg-primary2: #01030a;
+
+$bg-secondary1: #091128;
+$bg-secondary2: #060c20;
+
 $font-1: #efeff0;
 $font-2: #e7e7e7;
 
+$border1: #c4c4c466;
+$border2: #91919133;
+
 body {
+  position: relative;
   font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #183b5e;
+}
+
+.bg-primary {
+  width: 100vw;
+  height: 100vh;
+  background: url("../images/monicaWebBg.jpeg");
+  background-size: 100% 100%;
+  filter: blur(50px);
+}
+
+.absolute-content {
+  position: absolute;
 }
 
 label {
@@ -22,21 +46,21 @@ label {
 
   .btn-clear-item {
     button {
-      border: none;
+      border: 1px solid $border1;
       border-radius: 1em;
-      background: rgba(0, 0, 0, 0.3);
+      background: $bg-primary1;
       color: $font-2;
       padding: 0.7em 0.9em;
       &:hover {
         transition: all ease-in-out 0.2s;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: $bg-primary2;
       }
     }
   }
 }
 
 .form-promt-item {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: $bg-primary1;
   display: grid;
   width: 100%;
   margin: auto;
@@ -44,9 +68,10 @@ label {
   border-radius: 1em;
   overflow: hidden;
   transition: all ease-in-out 0.2s;
+  border: 1px solid $border1;
   &:hover {
     transition: all ease-in-out 0.2s;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $bg-primary2;
   }
 
   input {
@@ -77,12 +102,12 @@ label {
 }
 
 .item-response {
-  background-color: rgba(0, 0, 0, 0.64);
+  background-color: $bg-primary1;
   padding: 0.9em;
   border-radius: 1em;
   text-align: left;
   display: grid;
-  gap: 0.5em;
+  border: 1px solid $border2;
   .header-wrapper {
     width: 100%;
     display: flex;
@@ -92,16 +117,17 @@ label {
     font-size: 0.9em;
     color: $font-2;
     margin: 0;
+    white-space: pre-line;
   }
 }
 
 .item-question {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: $bg-secondary1;
   padding: 0.9em;
   border-radius: 1em;
   text-align: right;
   display: grid;
-  gap: 0.5em;
+  border: 1px solid $border2;
   .avatar-item {
     justify-content: end;
   }
@@ -110,6 +136,7 @@ label {
     font-size: 0.9em;
     color: $font-2;
     margin: 0;
+    white-space: pre-line;
   }
 }
 
